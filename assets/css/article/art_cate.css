@@ -1,0 +1,27 @@
+/* 文章类别 art_cate 专用 CSS */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f2f3f5;
+    padding: 15px;
+}
+
+.layui-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* 设置添加分类 弹出层 表单样式 */
+
+#form-add,
+#form-edit {
+    padding-top: 20px;
+    padding-right: 30px;
+}

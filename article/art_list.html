@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入layui CSS -->
+    <link rel="stylesheet" href="../assets/lib/layui/css/layui.css">
+    <!-- 引入自己的 CSS -->
+    <link rel="stylesheet" href="../assets/css/article/art_list.css">
+</head>
+
+<body>
+    <!-- 卡片区域 -->
+    <div class="layui-card">
+        <div class="layui-card-header">文章列表</div>
+        <div class="layui-card-body">
+            <!-- 筛选区域 -->
+            <form class="layui-form" id="form-search">
+                <!-- 在每一个表单的类名中增加layui-inline，就可以实现在一行显示多个item项-->
+                <div class="layui-form-item layui-inline">
+                    <!-- select的name必须与将来要提交的名称一致，即API接口规定的名称，如分类id为cate_id -->
+                    <select name="cate_id">
+                    </select>
+                </div>
+                <div class="layui-form-item layui-inline">
+                    <!-- 状态的名称为state -->
+                    <select name="state">
+                        <option value="">所有状态</option>
+                        <!-- value值也要根据接口提供的要求进行填写 -->
+                        <option value="已发布">已发布</option>
+                        <option value="草稿">草稿</option>
+                      </select>
+                </div>
+                <div class="layui-form-item layui-inline">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                </div>
+            </form>
+            <!-- 列表区域 -->
+            <table class="layui-table">
+                <colgroup>
+                    <!-- 设置各类宽度，第一列自适应，其它列固定值 -->
+                    <col>
+                    <col width="150">
+                    <col width="180">
+                    <col width="150">
+                    <col width="150">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>文章分类</th>
+                        <th>发表时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <td>贤心</td>
+                        <td>2016-11-29</td>
+                        <td>人生</td>
+                        <td>人生</td>
+                        <td>人生</td>
+                    </tr> -->
+                </tbody>
+            </table>
+
+            <!-- 分页区域 -->
+            <div id="pageBox"></div>
+        </div>
+    </div>
+
+    <!-- 定义一个art-template模板引擎 用于显示分类下拉菜单 -->
+    <script type="text/html" id="tpl-cate">
+        <option value="">所有分类</option>
+        {{each data}}
+        <option value="{{$value.Id}}">{{$value.name}}</option>
+        {{/each}}
+    </script>
+
+    <!-- 定义一个art-template模板引擎 用于显示列表数据的表格 -->
+    <script type="text/html" id="tpl-table">
+        {{each data}}
+        <tr>
+            <td>{{$value.title}}</td>
+            <td>{{$value.cate_name}}</td>
+            <td>{{$value.pub_date|dataFormat}}</td>
+            <td>{{$value.state}}</td>
+            <td>
+                <button type="button" class="layui-btn layui-btn-xs">编辑</button>
+                <button type="button" class="layui-btn layui-btn-xs layui-btn-danger btn-delete" data-id="{{$value.Id}}">删除</button>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+
+
+    <!-- 引入jQuery -->
+    <script src="../assets/lib/jquery.js"></script>
+    <!-- 引入layui JS -->
+    <script src="../assets/lib/layui/layui.all.js"></script>
+    <!-- 引入自己的baseAPI -->
+    <script src="../assets/js/baseAPI.js"></script>
+    <!-- 引入art-template模板引擎 -->
+    <script src="../assets/lib/template-web.js"></script>
+    <!-- 引入自己的JS -->
+    <script src="../assets/js/article/art_list.js"></script>
+</body>
+
+</html>
